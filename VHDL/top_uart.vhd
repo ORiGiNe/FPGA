@@ -158,12 +158,12 @@ begin
 			arduinoFuckedUp <= '0';
 		elsif Rising_Edge(CLOCK_50) then
 			-- interruption toutes les 0.1 secondes pour éviter un plantage permanent
-			if TimeOut <= 5000000 then 
-				TimeOut := TimeOut + 1;
-			else
-				TimeOut := 0;
-				CurrentState := Idle;
-			end if;
+--			if TimeOut <= 5000000 then 
+--				TimeOut := TimeOut + 1;
+--			else
+--				TimeOut := 0;
+--				CurrentState := Idle;
+--			end if;
 			
 			case CurrentState is
 				when Idle =>
@@ -171,7 +171,7 @@ begin
 					RAZencoder(CurrentEncoder) <= '0';
 					NextByte <= '0';
 					NewRequest <= '0';
-					CurrentEncoder := 0; -- FIXME : ArduinoFlowCtrl(2)
+					CurrentEncoder := 0; 
 			
 --					if ArduinoFlowCtrl(1) = '0' and ArduinoFlowCtrl(2) = '1' then
 --						CurrentState := ArduinoEvent1;
@@ -181,7 +181,7 @@ begin
 					if ArduinoFlowCtrl(1) = '0' and  ArduinoFlowCtrl(2) = '1' then
 						CurrentState := ArduinoEvent1;
 						CurrentEncoder := 1;
-					elsif  ArduinoFlowCtrl(1) = '0' and  ArduinoFlowCtrl(1) = '1' then
+					elsif  ArduinoFlowCtrl(2) = '0' and  ArduinoFlowCtrl(1) = '1' then
 						CurrentState := ArduinoEvent1;
 						CurrentEncoder := 2;
 					end if;
@@ -248,12 +248,9 @@ begin
 		end if;
 	end process;
 	
-	-- Test du decodeur /!\
-	--LEDG <= DataToTransmit(1) (14 downto 7);
-	
 	UART_TXD <= 'Z'; -- signal nul
 	valeurLEDGdebug(2) <= arduinoFuckedUp;
 	valeurLEDGdebug(4) <= NextByte;--valeurLEDG4;
-	valeurLEDGdebug(3) <= DataToTransmit(1)(0);
+	--valeurLEDGdebug(3) <= DataToTransmit(1)(0);
 	--valeurLEDGdebug(6) <= ArduinoFlowCtrl(1);
 end;

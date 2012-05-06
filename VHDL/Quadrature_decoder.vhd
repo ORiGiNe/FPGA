@@ -105,7 +105,7 @@ begin
 			voteA_previous <= A;
 			voteB_previous <= B;
 		elsif raz = '1' then
-			error <= '1';
+			error <= '0';
 			counter <= (others => '0');
 		elsif Rising_Edge(clk) then
 			code := voteA & voteA_previous & voteB & voteB_previous;

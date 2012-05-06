@@ -123,7 +123,7 @@ begin
 				NextLoad <= '0';
 				TransmitLoad <= '0';
 				Init1 <= '0';
-				Init2 <= '0';
+				--Init2 <= '0';
 			elsif GetFirstByte = '1' and Init1 = '0' then
 				-- bouton de droite : départ
 				Init1 <= '1';
@@ -134,7 +134,7 @@ begin
 			--elsif GetSecondByte = '1' and Init2 = '0' then
 			--	Init2 <= '1';
 			--elsif GetSecondByte = '0' and Init2 = '1' then
-			--	NextLoad <= '1';
+				NextLoad <= '1';
 			--	Init2 <= '0';
 			else
 				Load <= '0';
@@ -158,6 +158,7 @@ begin
 			else
 				TxData <= "11000011";
 				TransmitLoad <= '0';
+				FirstLoadDone <= '0';
 			end if;
 		end if;
   end process;
