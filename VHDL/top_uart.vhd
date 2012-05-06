@@ -107,7 +107,7 @@ begin
 		SysClk   => CLOCK_50, 		--: in  Std_Logic;  -- System Clock
 		Reset    => KEY(0), 		--: in  Std_Logic;  -- Reset input
 		TxD      => UART_TXD, 		--: out Std_Logic; PIN 4 (GPIO_01)
-		DataIn   => "1010111110010110",	--DataToTransmitBuffer,--
+		DataIn   => DataToTransmitBuffer,--"1010111110010110",	--
 		GetFirstByte => NewRequest, -- pour permettre un load
 		GetSecondByte => NextByte,
 		ByteSent => ByteSent,
@@ -173,18 +173,18 @@ begin
 					NewRequest <= '0';
 					CurrentEncoder := 0; -- FIXME : ArduinoFlowCtrl(2)
 			
-					if ArduinoFlowCtrl(1) = '0' and ArduinoFlowCtrl(2) = '1' then
+--					if ArduinoFlowCtrl(1) = '0' and ArduinoFlowCtrl(2) = '1' then
+--						CurrentState := ArduinoEvent1;
+--						CurrentEncoder := 1;
+--					end if;
+					-------------------------------
+					if ArduinoFlowCtrl(1) = '0' and  ArduinoFlowCtrl(2) = '1' then
 						CurrentState := ArduinoEvent1;
 						CurrentEncoder := 1;
+					elsif  ArduinoFlowCtrl(1) = '0' and  ArduinoFlowCtrl(1) = '1' then
+						CurrentState := ArduinoEvent1;
+						CurrentEncoder := 2;
 					end if;
-					-------------------------------
-					--if ArduinoFlowCtrl(1) = '0' and  ArduinoFlowCtrl(2) = '1' then
-					--	CurrentState := ArduinoEvent1;
-					--	CurrentEncoder := 1;
-					--elsif  ArduinoFlowCtrl(1) = '0' and  ArduinoFlowCtrl(1) = '1' then
-					--	CurrentState := ArduinoEvent1;
-					--	CurrentEncoder := 2;
-					--end if;
 					-------------------------------
 					-- case ArduinoFlowCtrl is
 						-- when ('0', '0') => null; -- IL NE SE PASSE RIEN
@@ -211,9 +211,11 @@ begin
 						CurrentState := FirstByteSent;
 					end if;
 				when FirstByteSent => 
-					if ArduinoFlowCtrl(CurrentEncoder) = '0' then
-						CurrentState := ArduinoEvent2;
-					end if;
+					RAZencoder(CurrentEncoder) <= '1';
+					CurrentState := Idle; 
+					--if ArduinoFlowCtrl(CurrentEncoder) = '0' then
+					--	CurrentState := ArduinoEvent2;
+					--end if;
 				when ArduinoEvent2 => 
 					if ArduinoFlowCtrl(CurrentEncoder) = '1' then
 						CurrentState := PrepareSecondByte;

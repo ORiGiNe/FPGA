@@ -133,8 +133,8 @@ begin
 		end if;
 	end process;
 	
-	sortie <= CONV_STD_LOGIC_VECTOR(counter(7 downto 0), 8);  -- Pour voir octet faible
-	--sortie <= CONV_STD_LOGIC_VECTOR(counter(15 downto 7), 8);   -- Pour voir octet fort
+	-- sortie <= CONV_STD_LOGIC_VECTOR(counter(7 downto 0), 8);  -- Pour voir octet faible
+	sortie <= CONV_STD_LOGIC_VECTOR(counter, 16)(15 downto 8);   -- Pour voir octet fort
 	readdata <= CONV_STD_LOGIC_VECTOR(counter, 16); -- On renvoit la valeur du compteur.
 	ledOut <= sortie;
 	errorOut <= error;
