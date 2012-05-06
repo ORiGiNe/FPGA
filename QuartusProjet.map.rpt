@@ -1,0 +1,466 @@
+Analysis & Synthesis report for QuartusProjet
+Sun May 06 09:35:41 2012
+Quartus II Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |TOP_UART|\DataBuffer:CurrentState
+  9. Registers Removed During Synthesis
+ 10. Removed Registers Triggering Further Register Optimizations
+ 11. General Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Parameter Settings for User Entity Instance: Top-level Entity: |top_uart
+ 14. Parameter Settings for User Entity Instance: Quadrature_decoder:Quadrature_decoder1
+ 15. Parameter Settings for User Entity Instance: Quadrature_decoder:Quadrature_decoder2
+ 16. Port Connectivity Checks: "Quadrature_decoder:Quadrature_decoder2"
+ 17. Port Connectivity Checks: "Quadrature_decoder:Quadrature_decoder1"
+ 18. Port Connectivity Checks: "miniUART:U1|TxUnit:TxDev"
+ 19. Elapsed Time Per Partition
+ 20. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2011 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                       ;
++------------------------------------+-----------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sun May 06 09:35:41 2012         ;
+; Quartus II Version                 ; 11.0 Build 208 07/03/2011 SP 1 SJ Web Edition ;
+; Revision Name                      ; QuartusProjet                                 ;
+; Top-level Entity Name              ; TOP_UART                                      ;
+; Family                             ; Cyclone IV E                                  ;
+; Total logic elements               ; 262                                           ;
+;     Total combinational functions  ; 245                                           ;
+;     Dedicated logic registers      ; 141                                           ;
+; Total registers                    ; 141                                           ;
+; Total pins                         ; 22                                            ;
+; Total virtual pins                 ; 0                                             ;
+; Total memory bits                  ; 0                                             ;
+; Embedded Multiplier 9-bit elements ; 0                                             ;
+; Total PLLs                         ; 0                                             ;
++------------------------------------+-----------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP4CE22F17C6       ;                    ;
+; Top-level entity name                                                      ; top_uart           ; QuartusProjet      ;
+; Family name                                                                ; Cyclone IV E       ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                            ;
++----------------------------------+-----------------+-----------------+------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                               ;
++----------------------------------+-----------------+-----------------+------------------------------------------------------------+
+; VHDL/uart_tx.vhd                 ; yes             ; User VHDL File  ; F:/ND Pierre/ORiGiNe/Code/FPGA/VHDL/uart_tx.vhd            ;
+; VHDL/top_uart.vhd                ; yes             ; User VHDL File  ; F:/ND Pierre/ORiGiNe/Code/FPGA/VHDL/top_uart.vhd           ;
+; VHDL/Quadrature_decoder.vhd      ; yes             ; User VHDL File  ; F:/ND Pierre/ORiGiNe/Code/FPGA/VHDL/Quadrature_decoder.vhd ;
+; VHDL/mini_uart.vhd               ; yes             ; User VHDL File  ; F:/ND Pierre/ORiGiNe/Code/FPGA/VHDL/mini_uart.vhd          ;
+; VHDL/clkUnit.vhd                 ; yes             ; User VHDL File  ; F:/ND Pierre/ORiGiNe/Code/FPGA/VHDL/clkUnit.vhd            ;
++----------------------------------+-----------------+-----------------+------------------------------------------------------------+
+
+
++--------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                  ;
++---------------------------------------------+----------------+
+; Resource                                    ; Usage          ;
++---------------------------------------------+----------------+
+; Estimated Total logic elements              ; 262            ;
+;                                             ;                ;
+; Total combinational functions               ; 245            ;
+; Logic element usage by number of LUT inputs ;                ;
+;     -- 4 input functions                    ; 104            ;
+;     -- 3 input functions                    ; 75             ;
+;     -- <=2 input functions                  ; 66             ;
+;                                             ;                ;
+; Logic elements by mode                      ;                ;
+;     -- normal mode                          ; 195            ;
+;     -- arithmetic mode                      ; 50             ;
+;                                             ;                ;
+; Total registers                             ; 141            ;
+;     -- Dedicated logic registers            ; 141            ;
+;     -- I/O registers                        ; 0              ;
+;                                             ;                ;
+; I/O pins                                    ; 22             ;
+; Maximum fan-out node                        ; CLOCK_50~input ;
+; Maximum fan-out                             ; 141            ;
+; Total fan-out                               ; 1255           ;
+; Average fan-out                             ; 2.92           ;
++---------------------------------------------+----------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                       ;
++---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------+--------------+
+; Compilation Hierarchy Node                  ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                              ; Library Name ;
++---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------+--------------+
+; |TOP_UART                                   ; 245 (83)          ; 141 (49)     ; 0           ; 0            ; 0       ; 0         ; 22   ; 0            ; |TOP_UART                                        ;              ;
+;    |Quadrature_decoder:Quadrature_decoder1| ; 53 (53)           ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |TOP_UART|Quadrature_decoder:Quadrature_decoder1 ;              ;
+;    |Quadrature_decoder:Quadrature_decoder2| ; 21 (21)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |TOP_UART|Quadrature_decoder:Quadrature_decoder2 ;              ;
+;    |miniUART:U1|                            ; 88 (12)           ; 53 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |TOP_UART|miniUART:U1                            ;              ;
+;       |ClkUnit:ClkDiv|                      ; 41 (41)           ; 18 (18)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |TOP_UART|miniUART:U1|ClkUnit:ClkDiv             ;              ;
+;       |TxUnit:TxDev|                        ; 35 (35)           ; 23 (23)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |TOP_UART|miniUART:U1|TxUnit:TxDev               ;              ;
++---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |TOP_UART|\DataBuffer:CurrentState                                                                                                                                                                                                                                                                                                                                ;
++--------------------------------------------+-----------------------------------------+--------------------------------------------+----------------------------------------+----------------------------------------+----------------------------------------+-------------------------------------------+----------------------------------------+-------------------------------+
+; Name                                       ; \DataBuffer:CurrentState.SendSecondByte ; \DataBuffer:CurrentState.PrepareSecondByte ; \DataBuffer:CurrentState.ArduinoEvent2 ; \DataBuffer:CurrentState.FirstByteSent ; \DataBuffer:CurrentState.SendFirstByte ; \DataBuffer:CurrentState.PrepareFirstByte ; \DataBuffer:CurrentState.ArduinoEvent1 ; \DataBuffer:CurrentState.Idle ;
++--------------------------------------------+-----------------------------------------+--------------------------------------------+----------------------------------------+----------------------------------------+----------------------------------------+-------------------------------------------+----------------------------------------+-------------------------------+
+; \DataBuffer:CurrentState.Idle              ; 0                                       ; 0                                          ; 0                                      ; 0                                      ; 0                                      ; 0                                         ; 0                                      ; 0                             ;
+; \DataBuffer:CurrentState.ArduinoEvent1     ; 0                                       ; 0                                          ; 0                                      ; 0                                      ; 0                                      ; 0                                         ; 1                                      ; 1                             ;
+; \DataBuffer:CurrentState.PrepareFirstByte  ; 0                                       ; 0                                          ; 0                                      ; 0                                      ; 0                                      ; 1                                         ; 0                                      ; 1                             ;
+; \DataBuffer:CurrentState.SendFirstByte     ; 0                                       ; 0                                          ; 0                                      ; 0                                      ; 1                                      ; 0                                         ; 0                                      ; 1                             ;
+; \DataBuffer:CurrentState.FirstByteSent     ; 0                                       ; 0                                          ; 0                                      ; 1                                      ; 0                                      ; 0                                         ; 0                                      ; 1                             ;
+; \DataBuffer:CurrentState.ArduinoEvent2     ; 0                                       ; 0                                          ; 1                                      ; 0                                      ; 0                                      ; 0                                         ; 0                                      ; 1                             ;
+; \DataBuffer:CurrentState.PrepareSecondByte ; 0                                       ; 1                                          ; 0                                      ; 0                                      ; 0                                      ; 0                                         ; 0                                      ; 1                             ;
+; \DataBuffer:CurrentState.SendSecondByte    ; 1                                       ; 0                                          ; 0                                      ; 0                                      ; 0                                      ; 0                                         ; 0                                      ; 1                             ;
++--------------------------------------------+-----------------------------------------+--------------------------------------------+----------------------------------------+----------------------------------------+----------------------------------------+-------------------------------------------+----------------------------------------+-------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                    ;
++---------------------------------------------------------------------+---------------------------------------------------------------------------------+
+; Register name                                                       ; Reason for Removal                                                              ;
++---------------------------------------------------------------------+---------------------------------------------------------------------------------+
+; \DataBuffer:CurrentEncoder[1]                                       ; Stuck at GND due to stuck port data_in                                          ;
+; Quadrature_decoder:Quadrature_decoder2|counter[0..15]               ; Lost fanout                                                                     ;
+; Quadrature_decoder:Quadrature_decoder2|\Shifter:clk_tick_counter[4] ; Merged with Quadrature_decoder:Quadrature_decoder1|\Shifter:clk_tick_counter[4] ;
+; Quadrature_decoder:Quadrature_decoder2|\Shifter:clk_tick_counter[3] ; Merged with Quadrature_decoder:Quadrature_decoder1|\Shifter:clk_tick_counter[3] ;
+; Quadrature_decoder:Quadrature_decoder2|\Shifter:clk_tick_counter[2] ; Merged with Quadrature_decoder:Quadrature_decoder1|\Shifter:clk_tick_counter[2] ;
+; Quadrature_decoder:Quadrature_decoder2|\Shifter:clk_tick_counter[1] ; Merged with Quadrature_decoder:Quadrature_decoder1|\Shifter:clk_tick_counter[1] ;
+; Quadrature_decoder:Quadrature_decoder2|\Shifter:clk_tick_counter[0] ; Merged with Quadrature_decoder:Quadrature_decoder1|\Shifter:clk_tick_counter[0] ;
+; RAZencoder[2]                                                       ; Stuck at GND due to stuck port data_in                                          ;
+; miniUART:U1|NextLoad                                                ; Stuck at GND due to stuck port data_in                                          ;
+; \DataBuffer:CurrentState.ArduinoEvent2                              ; Stuck at GND due to stuck port data_in                                          ;
+; \DataBuffer:CurrentState.PrepareSecondByte                          ; Stuck at GND due to stuck port data_in                                          ;
+; Nextbyte                                                            ; Stuck at GND due to stuck port data_in                                          ;
+; Total Number of Removed Registers = 27                              ;                                                                                 ;
++---------------------------------------------------------------------+---------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                ;
++--------------------------------------------+---------------------------+-------------------------------------------------------------------+
+; Register name                              ; Reason for Removal        ; Registers Removed due to This Register                            ;
++--------------------------------------------+---------------------------+-------------------------------------------------------------------+
+; \DataBuffer:CurrentEncoder[1]              ; Stuck at GND              ; Quadrature_decoder:Quadrature_decoder2|counter[15], RAZencoder[2] ;
+;                                            ; due to stuck port data_in ;                                                                   ;
+; \DataBuffer:CurrentState.PrepareSecondByte ; Stuck at GND              ; Nextbyte                                                          ;
+;                                            ; due to stuck port data_in ;                                                                   ;
++--------------------------------------------+---------------------------+-------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 141   ;
+; Number of registers using Synchronous Clear  ; 35    ;
+; Number of registers using Synchronous Load   ; 3     ;
+; Number of registers using Asynchronous Clear ; 46    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 87    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+-------------------------------------------------------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered                                                  ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+-------------------------------------------------------------+----------------------------+
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; |TOP_UART|miniUART:U1|ClkUnit:ClkDiv|\DivClk26:Cnt26[0]     ;                            ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; |TOP_UART|\DataBuffer:TimeOut[22]                           ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; |TOP_UART|Quadrature_decoder:Quadrature_decoder1|counter[4] ;                            ;
+; 32:1               ; 5 bits    ; 105 LEs       ; 105 LEs              ; 0 LEs                  ; |TOP_UART|miniUART:U1|ClkUnit:ClkDiv|\DivClk16:Cnt16[4]     ;                            ;
+; 11:1               ; 7 bits    ; 49 LEs        ; 7 LEs                ; 42 LEs                 ; |TOP_UART|miniUART:U1|TxUnit:TxDev|TReg[1]                  ;                            ;
+; 20:1               ; 3 bits    ; 39 LEs        ; 12 LEs               ; 27 LEs                 ; |TOP_UART|miniUART:U1|TxUnit:TxDev|BitCnt[3]                ;                            ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; |TOP_UART|LEDG                                              ;                            ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; |TOP_UART|LEDG                                              ;                            ;
+; 7:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; |TOP_UART|Selector5                                         ;                            ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; |TOP_UART|Selector10                                        ;                            ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 0 LEs                ; 80 LEs                 ; |TOP_UART|Quadrature_decoder:Quadrature_decoder1|Add2       ;                            ;
++--------------------+-----------+---------------+----------------------+------------------------+-------------------------------------------------------------+----------------------------+
+
+
++--------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |top_uart ;
++----------------+-------+-------------------------------------------------+
+; Parameter Name ; Value ; Type                                            ;
++----------------+-------+-------------------------------------------------+
+; encoderNumber  ; 2     ; Signed Integer                                  ;
++----------------+-------+-------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Quadrature_decoder:Quadrature_decoder1 ;
++-------------------+-------+---------------------------------------------------------+
+; Parameter Name    ; Value ; Type                                                    ;
++-------------------+-------+---------------------------------------------------------+
+; sampling_interval ; 21    ; Signed Integer                                          ;
++-------------------+-------+---------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Quadrature_decoder:Quadrature_decoder2 ;
++-------------------+-------+---------------------------------------------------------+
+; Parameter Name    ; Value ; Type                                                    ;
++-------------------+-------+---------------------------------------------------------+
+; sampling_interval ; 21    ; Signed Integer                                          ;
++-------------------+-------+---------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Quadrature_decoder:Quadrature_decoder2"                                               ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; ledout ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Quadrature_decoder:Quadrature_decoder1"                                               ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; ledout ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "miniUART:U1|TxUnit:TxDev"                                                                                 ;
++-------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                                                  ;
++-------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; trege ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:02     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Web Edition
+    Info: Processing started: Sun May 06 09:35:37 2012
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off QuartusProjet -c QuartusProjet
+Warning: Parallel compilation is not licensed and has been disabled
+Info: Found 2 design units, including 1 entities, in source file vhdl/uart_tx.vhd
+    Info: Found design unit 1: TxUnit-Behaviour
+    Info: Found entity 1: TxUnit
+Info: Found 2 design units, including 1 entities, in source file vhdl/top_uart.vhd
+    Info: Found design unit 1: TOP_UART-rtl
+    Info: Found entity 1: TOP_UART
+Info: Found 2 design units, including 1 entities, in source file vhdl/quadrature_decoder.vhd
+    Info: Found design unit 1: Quadrature_decoder-arch
+    Info: Found entity 1: Quadrature_decoder
+Info: Found 2 design units, including 1 entities, in source file vhdl/mini_uart.vhd
+    Info: Found design unit 1: miniUART-uart
+    Info: Found entity 1: miniUART
+Info: Found 2 design units, including 1 entities, in source file vhdl/clkunit.vhd
+    Info: Found design unit 1: ClkUnit-Behaviour
+    Info: Found entity 1: ClkUnit
+Info: Elaborating entity "top_uart" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at top_uart.vhd(93): object "valeurLEDGfromEncoder" assigned a value but never read
+Warning (10631): VHDL Process Statement warning at top_uart.vhd(150): inferring latch(es) for signal or variable "ArduinoFuckedUp", which holds its previous value in one or more paths through the process
+Warning (10492): VHDL Process Statement warning at top_uart.vhd(242): signal "DataToTransmit" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at top_uart.vhd(244): signal "DataToTransmit" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at top_uart.vhd(247): signal "valeurLEDGdebug" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (10041): Inferred latch for "ArduinoFuckedUp" at top_uart.vhd(150)
+Info: Elaborating entity "miniUART" for hierarchy "miniUART:U1"
+Warning (10036): Verilog HDL or VHDL warning at mini_uart.vhd(71): object "Init2" assigned a value but never read
+Info: Elaborating entity "ClkUnit" for hierarchy "miniUART:U1|ClkUnit:ClkDiv"
+Info: Elaborating entity "TxUnit" for hierarchy "miniUART:U1|TxUnit:TxDev"
+Info: Elaborating entity "Quadrature_decoder" for hierarchy "Quadrature_decoder:Quadrature_decoder1"
+Warning (10541): VHDL Signal Declaration warning at Quadrature_decoder.vhd(60): used implicit default value for signal "sortie" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning: 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning: The following nodes have both tri-state and non-tri-state drivers
+    Warning: Inserted always-enabled tri-state buffer between "UART_TXD" and its non-tri-state driver.
+Warning: Removed fan-outs from the following always-disabled I/O buffers
+    Warning: Removed fan-out from the always-disabled I/O buffer "UART_TXD" to the node "UART_TXD"
+Warning: Presettable and clearable registers converted to equivalent circuits with latches. Registers power-up to an undefined state, and DEVCLRn places the registers in an undefined state.
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder1|error" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder1|error~_emulated" and latch "Quadrature_decoder:Quadrature_decoder1|error~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder1|voteA_previous" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder1|voteA_previous~_emulated" and latch "Quadrature_decoder:Quadrature_decoder1|voteA_previous~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder1|shiftA[1]" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder1|shiftA[1]~_emulated" and latch "Quadrature_decoder:Quadrature_decoder1|voteA_previous~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder1|shiftA[0]" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder1|shiftA[0]~_emulated" and latch "Quadrature_decoder:Quadrature_decoder1|voteA_previous~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder1|shiftA[2]" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder1|shiftA[2]~_emulated" and latch "Quadrature_decoder:Quadrature_decoder1|voteA_previous~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder1|voteB_previous" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder1|voteB_previous~_emulated" and latch "Quadrature_decoder:Quadrature_decoder1|voteB_previous~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder1|shiftB[1]" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder1|shiftB[1]~_emulated" and latch "Quadrature_decoder:Quadrature_decoder1|voteB_previous~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder1|shiftB[0]" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder1|shiftB[0]~_emulated" and latch "Quadrature_decoder:Quadrature_decoder1|voteB_previous~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder1|shiftB[2]" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder1|shiftB[2]~_emulated" and latch "Quadrature_decoder:Quadrature_decoder1|voteB_previous~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder2|shiftB[1]" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder2|shiftB[1]~_emulated" and latch "Quadrature_decoder:Quadrature_decoder2|shiftB[1]~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder2|shiftB[0]" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder2|shiftB[0]~_emulated" and latch "Quadrature_decoder:Quadrature_decoder2|shiftB[1]~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder2|shiftB[2]" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder2|shiftB[2]~_emulated" and latch "Quadrature_decoder:Quadrature_decoder2|shiftB[1]~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder2|voteB_previous" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder2|voteB_previous~_emulated" and latch "Quadrature_decoder:Quadrature_decoder2|shiftB[1]~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder2|voteA_previous" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder2|voteA_previous~_emulated" and latch "Quadrature_decoder:Quadrature_decoder2|voteA_previous~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder2|shiftA[1]" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder2|shiftA[1]~_emulated" and latch "Quadrature_decoder:Quadrature_decoder2|voteA_previous~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder2|shiftA[0]" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder2|shiftA[0]~_emulated" and latch "Quadrature_decoder:Quadrature_decoder2|voteA_previous~latch"
+    Warning (13310): Register "Quadrature_decoder:Quadrature_decoder2|shiftA[2]" is converted into an equivalent circuit using register "Quadrature_decoder:Quadrature_decoder2|shiftA[2]~_emulated" and latch "Quadrature_decoder:Quadrature_decoder2|voteA_previous~latch"
+Info: Timing-Driven Synthesis is running
+Info: 16 registers lost all their fanouts during netlist optimizations. The first 16 are displayed below.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[15]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[14]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[13]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[12]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[11]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[10]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[9]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[8]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[7]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[6]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[5]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[4]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[3]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[2]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[1]" lost all its fanouts during netlist optimizations.
+    Info: Register "Quadrature_decoder:Quadrature_decoder2|counter[0]" lost all its fanouts during netlist optimizations.
+Info: Generating hard_block partition "hard_block:auto_generated_inst"
+Warning: Design contains 3 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "KEY[1]"
+    Warning (15610): No output dependent on input pin "SW[2]"
+    Warning (15610): No output dependent on input pin "SW[3]"
+Info: Implemented 284 device resources after synthesis - the final resource count might be different
+    Info: Implemented 13 input pins
+    Info: Implemented 9 output pins
+    Info: Implemented 262 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 35 warnings
+    Info: Peak virtual memory: 289 megabytes
+    Info: Processing ended: Sun May 06 09:35:41 2012
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:04
+
+

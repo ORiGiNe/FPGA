@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sun May 06 09:35:52 2012
+Quartus II Version : 11.0 Build 208 07/03/2011 SP 1 SJ Web Edition
+Revision Name : QuartusProjet
+Top-level Entity Name : TOP_UART
+Family : Cyclone IV E
+Device : EP4CE22F17C6
+Timing Models : Final
+Total logic elements : 261 / 22,320 ( 1 % )
+    Total combinational functions : 245 / 22,320 ( 1 % )
+    Dedicated logic registers : 141 / 22,320 ( < 1 % )
+Total registers : 141
+Total pins : 22 / 154 ( 14 % )
+Total virtual pins : 0
+Total memory bits : 0 / 608,256 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 132 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )

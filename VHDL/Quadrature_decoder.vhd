@@ -116,14 +116,14 @@ begin
 				when "0001" => counter <= counter + cstOne; -- 4 -> 1
 				when "0010" => counter <= counter - cstOne; -- 1 -> 4
 				when "0011" => null; -- aucun changement
-				when "0100" => null;--counter <= counter - cstOne; -- 2 -> 1 -- DIVISION
+				when "0100" => counter <= counter - cstOne; -- 2 -> 1 -- DIVISION
 				when "0101" => error <= '1'; -- Les deux signaux se modifie en même temps -> impossible.	
 				when "0110" => error <= '1'; -- Les deux signaux se modifie en même temps -> impossible.
-				when "0111" => null;--counter <= counter + cstOne; -- 3 -> 4  -- DIVISION
-				when "1000" => null;--counter <= counter + cstOne; -- 1 -> 2  -- DIVISION
+				when "0111" => counter <= counter + cstOne; -- 3 -> 4  -- DIVISION
+				when "1000" => counter <= counter + cstOne; -- 1 -> 2  -- DIVISION
 				when "1001" => error <= '1'; -- Les deux signaux se modifie en même temps -> impossible.
 				when "1010" => error <= '1'; -- Les deux signaux se modifie en même temps -> impossible.
-				when "1011" => null;-- counter <= counter - cstOne; -- 4 -> 3 -- DIVISION
+				when "1011" => counter <= counter - cstOne; -- 4 -> 3 -- DIVISION
 				when "1100" => null; -- aucun changement 
 				when "1101" => counter <= counter - cstOne; -- 3 -> 2
 				when "1110" => counter <= counter + cstOne; -- 2 -> 3
