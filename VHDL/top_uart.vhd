@@ -241,7 +241,7 @@ begin
 			if SW(1) = '0' then
 				LEDG <=  DataToTransmit(1)(7 downto 0);
 			else
-				LEDG <=  DataToTransmit(1)(15 downto 8);
+				LEDG <=  DataToTransmit(1)(14 downto 7);
 			end if;
 		else
 			LEDG <= valeurLEDGdebug; --valeurLEDGfromEncoder;-- Pour voir les valeurs de debug
