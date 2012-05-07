@@ -158,12 +158,12 @@ begin
 			arduinoFuckedUp <= '0';
 		elsif Rising_Edge(CLOCK_50) then
 			-- interruption toutes les 0.1 secondes pour éviter un plantage permanent
---			if TimeOut <= 5000000 then 
---				TimeOut := TimeOut + 1;
---			else
---				TimeOut := 0;
---				CurrentState := Idle;
---			end if;
+			if TimeOut <= 5000000 then 
+				TimeOut := TimeOut + 1;
+			else
+				TimeOut := 0;
+				CurrentState := Idle;
+			end if;
 			
 			case CurrentState is
 				when Idle =>
@@ -241,7 +241,7 @@ begin
 			if SW(1) = '0' then
 				LEDG <=  DataToTransmit(1)(7 downto 0);
 			else
-				LEDG <=  DataToTransmit(1)(14 downto 7);
+				LEDG <=  DataToTransmit(1)(15 downto 8);
 			end if;
 		else
 			LEDG <= valeurLEDGdebug; --valeurLEDGfromEncoder;-- Pour voir les valeurs de debug
