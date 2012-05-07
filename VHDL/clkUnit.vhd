@@ -52,83 +52,34 @@ architecture Behaviour of ClkUnit is
   -----------------------------------------------------------------------------
   -- Signals
   -----------------------------------------------------------------------------
-  signal ClkDiv26  : Std_Logic;
-  signal clkDiv10   : Std_Logic;
-  signal tmpEnTX   : Std_Logic;
+  signal ClkDiv  : Std_Logic;
+  --signal clkDiv10   : Std_Logic;
+  --signal tmpEnTX   : Std_Logic;
 begin
   -----------------------------------------------------------------------------
-  -- Divides the system clock of 50 MHz by 32
+  -- Divides the system clock of 50 MHz by 1302 => Baudrate 38400 (38.4 Khz)
   -----------------------------------------------------------------------------
-  DivClk26 : process(SysClk,Reset)
-     constant CntOne : unsigned(4 downto 0) := "00001";
-     variable Cnt26  : unsigned(5 downto 0);
+  DivClk : process(SysClk,Reset)
+     constant CntOne : unsigned(10 downto 0) := "00000000001";
+     variable Cnt  : unsigned(10 downto 0);
   begin
      if Rising_Edge(SysClk) then
         if Reset = '0' then
-           Cnt26 := "000000";
-           ClkDiv26 <= '0';
+           Cnt := "00000000000";
+           ClkDiv <= '0';
         else
-           Cnt26 := Cnt26 + CntOne;
-           case Cnt26 is
-              when "100000" =>
-                  ClkDiv26 <= '1';
-                  Cnt26 := "000000";                
+           Cnt := Cnt + CntOne;
+           case Cnt is
+              when "10100010110" =>
+                  ClkDiv <= '1';
+                  Cnt := "00000000000";                
               when others =>
-                  ClkDiv26 <= '0';
+                  ClkDiv <= '0';
            end case;
         end if;
      end if;
   end process;
-  -----------------------------------------------------------------------------
-  -- Provides the ClkDiv10 signal, at ~ 155 KHz
-  -----------------------------------------------------------------------------
-  DivClk10 : process(SysClk,Reset,Clkdiv26)
-     constant CntOne : unsigned(3 downto 0) := "0001";
-     variable Cnt10  : unsigned(3 downto 0);
-  begin
-     if Rising_Edge(SysClk) then
-        if Reset = '0' then
-           Cnt10 := "0000";
-           clkDiv10 <= '0';
-        elsif ClkDiv26 = '1' then
-           Cnt10 := Cnt10 + CntOne;
-        end if;
-        case Cnt10 is
-             when "1010" =>
-                clkDiv10 <= '1';
-                Cnt10 := "0000";
-             when others =>
-                clkDiv10 <= '0';
-        end case;
-     end if;
-  end process;
-  -----------------------------------------------------------------------------
-  -- Provides the EnableTX signal, at 9.6 KHz
-  -----------------------------------------------------------------------------
-  DivClk16 : process(SysClk,Reset,clkDiv10)
-     constant CntOne : unsigned(4 downto 0) := "00001";
-     variable Cnt16  : unsigned(4 downto 0);
-  begin
-     if Rising_Edge(SysClk) then
-        if Reset = '0' then
-           Cnt16 := "00000";
-           tmpEnTX <= '0';
-        elsif clkDiv10 = '1' then
-           Cnt16 := Cnt16 + CntOne;
-        end if;
-        case Cnt16 is
-           when "01111" =>
-                tmpEnTX <= '1';
-                Cnt16 := Cnt16 + CntOne;
-           when "10001" =>
-                Cnt16 := "00000";
-                tmpEnTX <= '0';
-           when others =>
-                tmpEnTX <= '0';
-        end case;
-     end if;
-  end process;
 
-  EnableTX <= tmpEnTX;
+  EnableTX <= ClkDiv;
 end Behaviour; --==================== End of architecture ===================--
 
