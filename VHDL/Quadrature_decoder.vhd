@@ -135,6 +135,7 @@ begin
 	
 	--sortie <= CONV_STD_LOGIC_VECTOR(counter(7 downto 0), 8);  -- Pour voir octet faible !SERARIEN!
 	--sortie <= CONV_STD_LOGIC_VECTOR(counter(14 downto 7), 8);   -- Pour voir octet fort !SERARIEN!
+	--readdata <= std_logic_vector(counter);
 	readdata <= std_logic_vector(counter);
 	--readdata <= CONV_STD_LOGIC_VECTOR(counter, 16); -- On renvoit la valeur du compteur.
 	ledOut <= sortie;
