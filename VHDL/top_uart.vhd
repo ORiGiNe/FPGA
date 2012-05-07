@@ -157,8 +157,8 @@ begin
 			CurrentEncoder := 0;
 			arduinoFuckedUp <= '0';
 		elsif Rising_Edge(CLOCK_50) then
-			-- interruption toutes les 0.1 secondes pour éviter un plantage permanent
-			if TimeOut <= 5000000 then 
+			-- interruption toutes les 0.0001 secondes (100us) pour éviter un plantage permanent
+			if TimeOut <= 5000 then 
 				TimeOut := TimeOut + 1;
 			else
 				TimeOut := 0;
