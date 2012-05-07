@@ -211,11 +211,9 @@ begin
 						CurrentState := FirstByteSent;
 					end if;
 				when FirstByteSent => 
-					RAZencoder(CurrentEncoder) <= '1';
-					CurrentState := Idle; 
-					--if ArduinoFlowCtrl(CurrentEncoder) = '0' then
-					--	CurrentState := ArduinoEvent2;
-					--end if;
+					if ArduinoFlowCtrl(CurrentEncoder) = '0' then
+						CurrentState := ArduinoEvent2;
+					end if;
 				when ArduinoEvent2 => 
 					if ArduinoFlowCtrl(CurrentEncoder) = '1' then
 						CurrentState := PrepareSecondByte;

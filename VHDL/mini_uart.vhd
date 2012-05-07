@@ -123,7 +123,7 @@ begin
 				NextLoad <= '0';
 				TransmitLoad <= '0';
 				Init1 <= '0';
-				--Init2 <= '0';
+				Init2 <= '0';
 			elsif GetFirstByte = '1' and Init1 = '0' then
 				-- bouton de droite : départ
 				Init1 <= '1';
@@ -131,11 +131,11 @@ begin
 				Load <= '1';
 				FirstLoadDone <= '0';
 				Init1 <= '0';
-			--elsif GetSecondByte = '1' and Init2 = '0' then
-			--	Init2 <= '1';
-			--elsif GetSecondByte = '0' and Init2 = '1' then
+			elsif GetSecondByte = '1' and Init2 = '0' then
+				Init2 <= '1';
+			elsif GetSecondByte = '0' and Init2 = '1' then
 				NextLoad <= '1';
-			--	Init2 <= '0';
+				Init2 <= '0';
 			else
 				Load <= '0';
 				NextLoad <= '0';
@@ -147,14 +147,13 @@ begin
 				TransmitLoad <= '0';
 			-- State 1 : transmit first byte
 			elsif Load = '1' and FirstLoadDone = '0' then
-				--TxData <= DataIn(7 downto 0);
-				--TransmitLoad <= '1';
+				TxData <= DataIn(7 downto 0);
+				TransmitLoad <= '1';
 				FirstLoadDone <= '1';
 			-- State 2 : transmit second byte
-			--elsif FirstLoadDone = '1' and NextLoad = '1' then
+			elsif FirstLoadDone = '1' and NextLoad = '1' then
 				TxData <= DataIn(15 downto 8);
-				--FirstLoadDone <= '0';
-				TransmitLoad <= '1';
+				FirstLoadDone <= '0';
 			else
 				TxData <= "11000011";
 				TransmitLoad <= '0';
