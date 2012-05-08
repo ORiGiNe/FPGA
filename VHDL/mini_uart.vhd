@@ -69,15 +69,19 @@ architecture uart of miniUART is
   signal NextLoad : Std_Logic;  -- Load transmit second buffer
   signal Init1 : Std_logic;
   signal Init2 : Std_logic;
+  signal ClkLck : Std_logic;
+  
   -----------------------------------------------------------------------------
   -- Baud rate Generator
   -----------------------------------------------------------------------------
-  component ClkUnit is
+  component PLL is
    port (
-     SysClk   : in  Std_Logic;  -- System Clock
-     EnableTX : out Std_Logic;  -- Control signal
-     Reset    : in  Std_Logic); -- Reset input
+		areset		: IN STD_LOGIC  := '0';
+		inclk0		: IN STD_LOGIC  := '0';
+		c0				: OUT STD_LOGIC ;
+		locked		: OUT STD_LOGIC );
   end component;
+
   -----------------------------------------------------------------------------
   -- Transmitter Unit
   -----------------------------------------------------------------------------
@@ -95,10 +99,11 @@ begin
   -----------------------------------------------------------------------------
   -- Instantiation of internal components
   -----------------------------------------------------------------------------
-  ClkDiv : ClkUnit PORT MAP ( 
-		SysClk   => SysClk, -- System Clock
-		EnableTX => EnabTX,  -- Control signal
-		Reset    => Reset  -- Reset input
+  ClkDiv : PLL PORT MAP ( 
+		areset	=> Reset,  -- Reset input
+		c0			=> EnabTX, -- Control signal
+		inclk0	=> SysClk, -- System Clock
+		locked	=> ClkLck  -- Reset input
 	);
 	
 	TxDev : TxUnit PORT MAP ( 
