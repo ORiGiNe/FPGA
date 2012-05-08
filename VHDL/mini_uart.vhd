@@ -69,18 +69,22 @@ architecture uart of miniUART is
   signal NextLoad : Std_Logic;  -- Load transmit second buffer
   signal Init1 : Std_logic;
   signal Init2 : Std_logic;
-  signal ClkLck : Std_logic;
   
   -----------------------------------------------------------------------------
   -- Baud rate Generator
   -----------------------------------------------------------------------------
-  component PLL is
+--  component PLL is
+--   port (
+--		areset		: IN STD_LOGIC  := '0';
+--		inclk0		: IN STD_LOGIC  := '0';
+--		c0				: OUT STD_LOGIC );
+--  end component;
+	component ClkUnit is
    port (
-		areset		: IN STD_LOGIC  := '0';
-		inclk0		: IN STD_LOGIC  := '0';
-		c0				: OUT STD_LOGIC ;
-		locked		: OUT STD_LOGIC );
-  end component;
+     SysClk   : in  Std_Logic;  -- System Clock
+     EnableTx : out Std_Logic;  -- Control signal
+     Reset    : in  Std_Logic); -- Reset input
+	 end component;
 
   -----------------------------------------------------------------------------
   -- Transmitter Unit
@@ -99,13 +103,17 @@ begin
   -----------------------------------------------------------------------------
   -- Instantiation of internal components
   -----------------------------------------------------------------------------
-  ClkDiv : PLL PORT MAP ( 
-		areset	=> Reset,  -- Reset input
-		c0			=> EnabTX, -- Control signal
-		inclk0	=> SysClk, -- System Clock
-		locked	=> ClkLck  -- Reset input
+--	ClkDiv : PLL PORT MAP ( 
+--		inclk0	=> SysClk,  -- System Clock
+--		c0			=> EnabTX, -- Control signal
+--		areset	=> Reset  -- Reset input
+--	);
+	ClkDiv : ClkUnit PORT MAP (
+		  SysClk   => SysClk, -- System Clock
+		  EnableTX => EnabTX,  -- Control signal
+		  Reset    => Reset  -- Reset input
 	);
-	
+
 	TxDev : TxUnit PORT MAP ( 
      Clk    => SysClk, -- Clock signal
      Reset  => Reset, -- Reset input
@@ -118,7 +126,7 @@ begin
   -----------------------------------------------------------------------------
   -- Combinational section
   -----------------------------------------------------------------------------
-  process(SysClk, GetFirstByte, GetSecondByte)
+  process(SysClk, GetFirstByte, GetSecondByte, EnabTX)
   begin
 	 if Rising_Edge(SysClk) then
 			if Reset = '0' then
@@ -167,7 +175,7 @@ begin
 		end if;
   end process;
   
-  LoadOut <= TransmitLoad;
+  --LoadOut <= TransmitLoad;
   FirstLoadOut <= FirstLoadDone;
   NextLoadOut <= NextLoad; -- GetSecondByte;
 end uart; --===================== End of architecture =======================--

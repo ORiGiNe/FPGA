@@ -107,7 +107,7 @@ begin
 		SysClk   => CLOCK_50, 		--: in  Std_Logic;  -- System Clock
 		Reset    => KEY(0), 		--: in  Std_Logic;  -- Reset input
 		TxD      => UART_TXD, 		--: out Std_Logic; PIN 4 (GPIO_01)
-		DataIn   => DataToTransmitBuffer,--"1010111110010110",	--
+		DataIn   => "1010111110010110",	--DataToTransmitBuffer,--
 		GetFirstByte => NewRequest, -- pour permettre un load
 		GetSecondByte => NextByte,
 		ByteSent => ByteSent,
@@ -157,8 +157,8 @@ begin
 			CurrentEncoder := 0;
 			arduinoFuckedUp <= '0';
 		elsif Rising_Edge(CLOCK_50) then
-			-- interruption toutes les 0.0001 secondes (100us) pour éviter un plantage permanent
-			if TimeOut <= 5000 then 
+			-- interruption toutes les 0.1 secondes (100us) pour éviter un plantage permanent
+			if TimeOut <= 5000000 then 
 				TimeOut := TimeOut + 1;
 			else
 				TimeOut := 0;
@@ -226,7 +226,7 @@ begin
 					NextByte <= '0';
 					if ByteSent = '1' then
 						RAZencoder(CurrentEncoder) <= '1';
-						CurrentState := Idle; -- SecondByteSent
+						CurrentState := Idle;
 					end if;
 				when others => NULL;
 			end case;

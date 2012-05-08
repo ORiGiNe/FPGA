@@ -66,10 +66,12 @@ begin
   -----------------------------------------------------------------------------
   process(Clk,Reset,Enable,Load,DataO,TBuff,TReg,tmpTRegE,tmpTBufE)
       variable tmp_TRegE : Std_Logic;
+		variable oldEnable : Std_Logic := '0'; -- Rising Edge detector
       constant CntOne    : Unsigned(3 downto 0):="0001";
   begin
      if Rising_Edge(Clk) then
         if Reset = '0' then
+		     oldEnable := '0';
            tmpTRegE <= '1';
            tmpTBufE <= '1';
            TxD <= '1';
@@ -77,7 +79,11 @@ begin
         elsif Load = '1' then
            TBuff <= DataO;
            tmpTBufE <= '0';
-        elsif Enable = '1' then
+        --elsif Enable = '0' then
+			--	oldEnable := '0';
+		  --elsif Enable = '1' and oldEnable = '0' then
+			--  oldEnable := '1';
+			elsif Enable = '1' then
            if ( tmpTBufE = '0') and (tmpTRegE = '1') then
               TReg <= TBuff;
               tmpTRegE <= '0';
