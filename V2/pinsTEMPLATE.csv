@@ -1,0 +1,43 @@
+# Copyright (C) 1991-2011 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+# Quartus II Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Web Edition
+# File: F:/ND Pierre/ORiGiNe/Code/FPGA/V2/pinsTEMPLATE.csv
+# Generated on: Thu May 10 23:45:27 2012
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus II software.
+
+To,Direction,Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair,I/O Bank,VREF Group
+ArduinoFlowCtrl1_N,Input,PIN_C3,3.3-V LVTTL,,,,,8,B8_N0
+ArduinoFlowCtrl2_N,Input,PIN_A3,3.3-V LVTTL,,,,,8,B8_N0
+CLOCK,Input,,,,,,,,
+Encoder1_A,Input,PIN_B4,3.3-V LVTTL,,,,,8,B8_N0
+Encoder1_B,Input,PIN_B5,3.3-V LVTTL,,,,,8,B8_N0
+Encoder2_A,Input,PIN_D5,3.3-V LVTTL,,,,,8,B8_N0
+Encoder2_B,Input,PIN_A6,3.3-V LVTTL,,,,,8,B8_N0
+KEY[1],Input,PIN_J15,3.3-V LVTTL,,,,,5,B5_N0
+KEY[0],Input,PIN_E1,3.3-V LVTTL,,,,,1,B1_N0
+LEDG[7],Output,PIN_L3,3.3-V LVTTL,,,,,2,B2_N0
+LEDG[6],Output,PIN_B1,3.3-V LVTTL,,,,,1,B1_N0
+LEDG[5],Output,PIN_F3,3.3-V LVTTL,,,,,1,B1_N0
+LEDG[4],Output,PIN_D1,3.3-V LVTTL,,,,,1,B1_N0
+LEDG[3],Output,PIN_A11,3.3-V LVTTL,,,,,7,B7_N0
+LEDG[2],Output,PIN_B13,3.3-V LVTTL,,,,,7,B7_N0
+LEDG[1],Output,PIN_A13,3.3-V LVTTL,,,,,7,B7_N0
+LEDG[0],Output,PIN_A15,3.3-V LVTTL,,,,,7,B7_N0
+SW[3],Input,PIN_M15,3.3-V LVTTL,,,,,5,B5_N0
+SW[2],Input,PIN_B9,3.3-V LVTTL,,,,,7,B7_N0
+SW[1],Input,PIN_T8,3.3-V LVTTL,,,,,3,B3_N0
+SW[0],Input,PIN_M1,3.3-V LVTTL,,,,,2,B2_N0
+UART_TXD,Output,PIN_D6,3.3-V LVTTL,,,,,8,B8_N0
