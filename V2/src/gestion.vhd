@@ -31,16 +31,14 @@ entity gestionUART is
 	Encoder2_B : in std_logic;
 	
 	-- Gestion UART
-	TX_busy_n : in std_logic;
-	ResetUART_N : out std_logic;
-	EnableTX : out std_logic;
+	TX_empty : in std_logic;
+	Global_Reset : out std_logic;
+	LoadTX : out std_logic;
 	TxData : out Std_Logic_Vector(7 downto 0)
 	);
 end entity;
 	
 architecture gestion of gestionUART is
-
-
 	component Quadrature_decoder
 	generic (
 		sampling_interval : integer
@@ -70,8 +68,6 @@ architecture gestion of gestionUART is
 	-- Gestion des erreurs
 	signal ArduinoFuckedUp : std_logic;
 	signal valeurLEDGdebug : std_logic_vector(7 downto 0);
-	
-	
 	
 	begin
 		-- First encoder
@@ -104,6 +100,8 @@ architecture gestion of gestionUART is
 		errorOut => ArduinoFuckedUp--valeurLEDGdebug(1)
 	);
 	
+	Global_Reset <= KEY(0);
+	
 	-- /!\ 
 	-- Valable uniquement si encoderNumber == 2
 	ArduinoFlowCtrl <= (not ArduinoFlowCtrl1_N, not ArduinoFlowCtrl2_N);
@@ -114,15 +112,16 @@ architecture gestion of gestionUART is
 	variable CurrentState : CommState := Idle; -- encoder's state
 	variable CurrentEncoder : integer range 0 to encoderNumber; -- Number of current encoder between 1 and encoderNumber. Not defined => 0.
 	variable TimeOut : integer := 0;  
-	variable compteur : integer := 0;
+	variable compteur : unsigned(7 downto 0) := "00000000";
+	constant CntOne : unsigned(7 downto 0) := "00000001";
 	
 	begin
 		if KEY(0) = '0' then
 			CurrentState := Idle;
 			CurrentEncoder := 0;
 			arduinoFuckedUp <= '0';	
-			ResetUART_N <= '0';
 			valeurLEDGdebug <= "00000000";
+			compteur := "00000000";
 		elsif Rising_Edge(CLOCK) then
 			-- interruption toutes les 0.1 secondes pour éviter un plantage permanent
 			if TimeOut <= 5000000 then 
@@ -132,26 +131,24 @@ architecture gestion of gestionUART is
 				--CurrentState := Idle;
 			end if;
 			
-			valeurLEDGdebug(7) <= TX_busy_n;
-			valeurLEDGdebug(7) <= '1';
+			valeurLEDGdebug(7) <= TX_empty;
 			
 			case CurrentState is
 				when Idle =>
 					-- on reinitialise
 					TimeOut := 0;
-					EnableTX <= '0';
-					ResetUART_N <= '1';
+					LoadTX <= '0';
 					RAZencoder(CurrentEncoder) <= '0';
 					CurrentEncoder := 0;
-					TxData <= "00000000";
+					--TxData <= "00000000";
 					
 					-- gestion debug
-					valeurLEDGdebug <= "00000000";
-					valeurLEDGdebug(0) <= '0';--ArduinoFlowCtrl(1); -- debug
+					--valeurLEDGdebug <= "00000000";
+					valeurLEDGdebug(0) <= ArduinoFlowCtrl(1); -- debug
 					
 					if ArduinoFlowCtrl(1) = '1' and  ArduinoFlowCtrl(2) = '0' then
 						valeurLEDGdebug(0) <= '1';
-						if TX_busy_n = '1' then -- Le TX est ok = envoi fini
+						if TX_empty = '1' then -- Le TX est vide
 							CurrentState := ArduinoEvent1;
 							CurrentEncoder := 1;
 						end if;
@@ -166,13 +163,12 @@ architecture gestion of gestionUART is
 					end if;
 				when PrepareFirstByte => 
 					valeurLEDGdebug(2) <= '1'; -- debug
-					TxData <= "01101010";--DataToTransmit(CurrentEncoder)(15 downto 8);--(7 downto 0);
-					EnableTX <= '1';
+					TxData <= std_logic_vector(compteur);--DataToTransmit(CurrentEncoder)(15 downto 8);--(7 downto 0);
+					LoadTX <= '1';
 					CurrentState := SendFirstByte;
 				when SendFirstByte =>
 					--if compteur = 3 then
-					EnableTX <= '0';
-					if TX_busy_n = '0' then -- Le TX est busy = envoi en cours
+					if TX_empty = '0' then -- Le TX est busy = envoi en cours
 						CurrentState := FirstByteSent;
 					end if;
 					--else
@@ -180,28 +176,31 @@ architecture gestion of gestionUART is
 					--end if;
 				when FirstByteSent => 
 					valeurLEDGdebug(3) <= '1'; -- debug
-					if TX_busy_n = '1' then -- Le TX est ok = envoi fini
-						RAZencoder(CurrentEncoder) <= '1'; 
-						CurrentState := Idle;
+--					if TX_empty = '1' then -- Le TX est ok = envoi fini
+--						compteur := compteur + CntOne; -- un envoi de plus
+--						RAZencoder(CurrentEncoder) <= '1'; 
+--						CurrentState := Idle;
+--					end if;
+--					
+					if TX_empty = '1' and ArduinoFlowCtrl(CurrentEncoder) = '1' then
+						CurrentState := ArduinoEvent2;
 					end if;
-					
-				--	if ArduinoFlowCtrl(CurrentEncoder) = '1' then
-				--		valeurLEDGdebug(0) <= '1';
-				--		CurrentState := ArduinoEvent2;
-				--	end if;
 				when ArduinoEvent2 => 
 					valeurLEDGdebug(4) <= '1'; -- debug
+					LoadTX <= '0';
 					if ArduinoFlowCtrl(CurrentEncoder) = '0' then
 						CurrentState := PrepareSecondByte;
 					end if;				
 				when PrepareSecondByte => 
 					valeurLEDGdebug(5) <= '1'; -- debug
-					TxData <= DataToTransmit(CurrentEncoder)(15 downto 8);
-					EnableTX <= '0';
+					TxData <= std_logic_vector(compteur);--DataToTransmit(CurrentEncoder)(15 downto 8);
+					LoadTX <= '1';
 					CurrentState := SendSecondByte;
 				when SendSecondByte =>
 					valeurLEDGdebug(6) <= '1'; -- debug
-					if TX_busy_n = '1' then -- Le TX est ok = envoi fini
+					if TX_empty = '1' then -- Le TX est ok = envoi fini
+						LoadTX <= '0';
+					   compteur := compteur + CntOne; -- un envoi de plus
 						RAZencoder(CurrentEncoder) <= '1'; 
 						CurrentState := Idle;
 					end if;

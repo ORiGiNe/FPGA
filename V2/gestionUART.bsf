@@ -89,8 +89,8 @@ applicable agreement for further details.
 	(port
 		(pt 0 176)
 		(input)
-		(text "TX_busy_n" (rect 0 0 63 12)(font "Arial" ))
-		(text "TX_busy_n" (rect 21 171 84 183)(font "Arial" ))
+		(text "TX_empty" (rect 0 0 56 12)(font "Arial" ))
+		(text "TX_empty" (rect 21 171 77 183)(font "Arial" ))
 		(line (pt 0 176)(pt 16 176)(line_width 1))
 	)
 	(port
@@ -103,15 +103,15 @@ applicable agreement for further details.
 	(port
 		(pt 264 48)
 		(output)
-		(text "ResetUART_N" (rect 0 0 77 12)(font "Arial" ))
-		(text "ResetUART_N" (rect 166 43 243 55)(font "Arial" ))
+		(text "Global_Reset" (rect 0 0 84 12)(font "Arial" ))
+		(text "Global_Reset" (rect 159 43 243 55)(font "Arial" ))
 		(line (pt 264 48)(pt 248 48)(line_width 1))
 	)
 	(port
 		(pt 264 64)
 		(output)
-		(text "EnableTX" (rect 0 0 56 12)(font "Arial" ))
-		(text "EnableTX" (rect 187 59 243 71)(font "Arial" ))
+		(text "LoadTX" (rect 0 0 42 12)(font "Arial" ))
+		(text "LoadTX" (rect 201 59 243 71)(font "Arial" ))
 		(line (pt 264 64)(pt 248 64)(line_width 1))
 	)
 	(port

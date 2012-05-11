@@ -44,7 +44,6 @@ entity TxUnit is
      Enable : in  Std_Logic;  -- Enable input
      Load   : in  Std_Logic;  -- Load transmit data
      TxD    : out Std_Logic;  -- RS-232 data output
-     TRegE  : out Std_Logic;  -- Tx register empty
      TBufE  : out Std_Logic;  -- Tx buffer empty
      DataO  : in  Std_Logic_Vector(7 downto 0));
 end entity; --================== End of entity ==============================--
@@ -64,12 +63,12 @@ begin
   -----------------------------------------------------------------------------
   -- Implements the Tx unit
   -----------------------------------------------------------------------------
-  process(Clk,Reset,Enable,Load,DataO,TBuff,TReg,tmpTRegE,tmpTBufE)
-      variable tmp_TRegE : Std_Logic;
-      constant CntOne    : Unsigned(3 downto 0):="0001";
-  begin
-     if Rising_Edge(Clk) then
-        if Reset = '0' then
+  Tx_sender : process(Clk,Reset,Enable,Load,DataO,TBuff,TReg,tmpTRegE,tmpTBufE)
+	constant CntOne    : Unsigned(3 downto 0):="0001";
+	
+	begin
+     if Rising_Edge(Enable) then
+		  if Reset = '0' then
            tmpTRegE <= '1';
            tmpTBufE <= '1';
            TxD <= '1';
@@ -77,40 +76,43 @@ begin
         elsif Load = '1' then
            TBuff <= DataO;
            tmpTBufE <= '0';
-        elsif Enable = '1' then
-           if ( tmpTBufE = '0') and (tmpTRegE = '1') then
-              TReg <= TBuff;
-              tmpTRegE <= '0';
---              tmp_TRegE := '0';
-              tmpTBufE <= '1';
---           else
---              tmp_TRegE := tmpTRegE;
-           end if;
- 
-           if tmpTRegE = '0' then
-              case BitCnt is
-                  when "0000" =>
-                          TxD <= '0';
-                          BitCnt <= BitCnt + CntOne;                         
-                  when "0001" | "0010" | "0011" |
-                       "0100" | "0101" | "0110" |
-                       "0111" | "1000" =>
-                          TxD <= TReg(0);
-                          TReg <= '1' & TReg(7 downto 1);
-                          BitCnt <= BitCnt + CntOne;
-                  when "1001" =>
-                          TxD <= '1';
-                          TReg <= '1' & TReg(7 downto 1);
-                          BitCnt <= "0000";
-                          tmpTRegE <= '1';
-                  when others => null;
-              end case;
-           end if;
-        end if;
-     end if;
+		  end if;
+		  
+		  if tmpTBufE = '0' and tmpTRegE = '1' then
+			  TReg <= TBuff;
+			  tmpTRegE <= '0';
+			  tmpTBufE <= '1';
+		  end if;
+	 
+		  if tmpTRegE = '0' then
+			  case BitCnt is
+					when "0000" =>
+							  TxD <= '0';
+							  BitCnt <= BitCnt + CntOne;                         
+					when "0001" | "0010" | "0011" |
+						  "0100" | "0101" | "0110" |
+						  "0111" | "1000" =>
+							  TxD <= TReg(0);
+							  TReg <= '1' & TReg(7 downto 1);
+							  BitCnt <= BitCnt + CntOne;
+					when "1001" =>
+							  TxD <= '1';
+							  TReg <= '1' & TReg(7 downto 1);
+							  BitCnt <= "0000";
+							  tmpTRegE <= '1';
+					when others => null;
+			  end case;
+		  end if;
+	  end if;
   end process;
- 
-      TRegE <= tmpTRegE;
-      TBufE <= tmpTBufE;
+--  
+--  Tx_controler : process(Clk,Reset,Load)
+--  begin
+--     if Rising_Edge(Clk) then
+--        
+--		end if;
+--  end process;
+-- 
+  TBufE <= tmpTBufE;
 end Behaviour; --=================== End of architecture ====================--
 
