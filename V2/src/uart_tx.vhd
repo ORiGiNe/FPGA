@@ -73,7 +73,7 @@ begin
            tmpTBufE <= '1';
            TxD <= '1';
            BitCnt <= "0000";
-        elsif Load = '1' then
+        elsif Load = '1' and tmpTBufE = '1' then
            TBuff <= DataO;
            tmpTBufE <= '0';
 		  end if;
@@ -105,14 +105,7 @@ begin
 		  end if;
 	  end if;
   end process;
---  
---  Tx_controler : process(Clk,Reset,Load)
---  begin
---     if Rising_Edge(Clk) then
---        
---		end if;
---  end process;
--- 
+ 
   TBufE <= tmpTBufE;
 end Behaviour; --=================== End of architecture ====================--
 
