@@ -14,18 +14,18 @@
 
 # Quartus II Version 11.0 Build 208 07/03/2011 Service Pack 1 SJ Web Edition
 # File: F:/ND Pierre/ORiGiNe/Code/FPGA/V2/pinsTEMPLATE.csv
-# Generated on: Thu May 10 23:45:27 2012
+# Generated on: Sun May 13 01:22:35 2012
 
 # Note: The column header names should not be changed if you wish to import this .csv file into the Quartus II software.
 
 To,Direction,Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair,I/O Bank,VREF Group
-ArduinoFlowCtrl1_N,Input,PIN_C3,3.3-V LVTTL,,,,,8,B8_N0
-ArduinoFlowCtrl2_N,Input,PIN_A3,3.3-V LVTTL,,,,,8,B8_N0
-CLOCK,Input,,,,,,,,
-Encoder1_A,Input,PIN_B4,3.3-V LVTTL,,,,,8,B8_N0
-Encoder1_B,Input,PIN_B5,3.3-V LVTTL,,,,,8,B8_N0
-Encoder2_A,Input,PIN_D5,3.3-V LVTTL,,,,,8,B8_N0
-Encoder2_B,Input,PIN_A6,3.3-V LVTTL,,,,,8,B8_N0
+ArduinoFlowCtrl1_N,Input,PIN_D3,3.3-V LVTTL,,,,,8,B8_N0
+ArduinoFlowCtrl2_N,Input,PIN_C3,3.3-V LVTTL,,,,,8,B8_N0
+CLOCK,Input,PIN_R8,,,,,,3,B3_N0
+Encoder1_A,Input,PIN_A3,3.3-V LVTTL,,,,,8,B8_N0
+Encoder1_B,Input,PIN_B4,3.3-V LVTTL,,,,,8,B8_N0
+Encoder2_A,Input,PIN_B5,3.3-V LVTTL,,,,,8,B8_N0
+Encoder2_B,Input,PIN_D5,3.3-V LVTTL,,,,,8,B8_N0
 KEY[1],Input,PIN_J15,3.3-V LVTTL,,,,,5,B5_N0
 KEY[0],Input,PIN_E1,3.3-V LVTTL,,,,,1,B1_N0
 LEDG[7],Output,PIN_L3,3.3-V LVTTL,,,,,2,B2_N0
