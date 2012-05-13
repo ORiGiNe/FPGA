@@ -127,10 +127,8 @@ architecture gestion of gestionUART is
 			if TimeOut <= 100000 then 
 				TimeOut := TimeOut + 1;
 			else
-				if TX_empty = '0' then
 					TimeOut := 0;
 					CurrentState := Idle;
-				end if;
 			end if;
 			
 			valeurLEDGdebug(7) <= TX_empty;
